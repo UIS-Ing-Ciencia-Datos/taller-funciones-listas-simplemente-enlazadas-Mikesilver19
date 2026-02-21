@@ -98,9 +98,35 @@ while opcion != 4:
       print("1.individual")
       print("2.Todos los Huespedes")
       b = int(input())
+      if b == 1:
+        print("Digite la cedula del huesped a consultar")
+        a = input()
+        posicion = BuscarPosicion(Cedula, a)
+        if posicion == -1:
+          print("Huesped no encontrado")
+        else:
+          actualnombre = Nombre
+          actualcedula = Cedula
+          actualhabitacion = habitacionesOcupadas
+
+          for i in range(posicion-1):
+              actualnombre = actualnombre.next
+              actualcedula = actualcedula.next
+              actualhabitacion = actualhabitacion.next
+
+          print("Nombre:", actualnombre.data)
+          print("Cedula:", actualcedula.data)
+          print("Habitacion:", actualhabitacion.data)
       if b == 2:
-        Imprimir(Cedula)
-        
+        actualnombre= Nombre
+        actualcedula = Cedula
+        actualhabitacion = habitacionesOcupadas
+        while actualnombre is not None and actualcedula is not None:
+          print("Nombre: ",actualnombre.data, " Cedula: ",actualcedula.data," Habitacion: ",actualhabitacion.data)
+          actualnombre = actualnombre.next
+          actualcedula = actualcedula.next
+          actualhabitacion = actualhabitacion.next
+        11
     if a == 2:
       print("1.Habitaciones Disponibles")
       print("2.Habitaciones Ocupadas")
@@ -123,6 +149,10 @@ while opcion != 4:
           contador = 1
           while actual and contador < posicion:
               actual = actual.next
+              contador += 1
+          if actual:
+              HabitacionesDisponibles = AgregarAlInicio(HabitacionesDisponibles, Node(actual.data))
+          habitacionesOcupadas = EliminarPorPosicion(habitacionesOcupadas, posicion)              actual = actual.next
               contador += 1
           if actual:
               HabitacionesDisponibles = AgregarAlInicio(HabitacionesDisponibles, Node(actual.data))
